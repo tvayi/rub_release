@@ -19,31 +19,6 @@ public:
 		}
 	}
 
-	typename std::forward_list<std::pair<Key, T> >::iterator begin() {
-		int right = 0;
-		int count = 0;
-		int index = 0;
-		for (int i = right + 1; i < 10; i++)
-		{
-			if (map_[i].empty() == 0)
-			{
-				right = i;
-				break;
-			}
-
-		}
-		return map_[right].begin();
-	}
-	typename std::forward_list<std::pair<Key, T> >::iterator end() {
-		int right = 0;
-		for (int i = right + 1; i < 10; i++)
-		{
-			if (map_[i].empty() == 0) {
-				right = i;
-			}
-		}
-		return map_[right].end();
-	}
 
 	void erase(const Key& k) {
 		for (auto i = map_[my_Hash(k)].begin(); i != map_[my_Hash(k)].end(); i++) {
@@ -140,6 +115,33 @@ public:
 			return *it;
 		}
 	};
+
+	Iterator begin() {
+		int right = 0;
+		int count = 0;
+		int index = 0;
+		for (int i = right + 1; i < 10; i++)
+		{
+			if (map_[i].empty() == 0)
+			{
+				right = i;
+				break;
+			}
+
+		}
+		return *this;
+	}
+
+	Iterator end() {
+		int right = 0;
+		for (int i = right + 1; i < 10; i++)
+		{
+			if (map_[i].empty() == 0) {
+				right = i;
+			}
+		}
+		return *this;
+	}
 
 };
 
